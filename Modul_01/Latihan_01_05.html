@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 5</title>
+</head>
+<body>
+    <form action="" method="post">
+        <fieldset>
+            <legend>Formulir Data Pribadi</legend>
+            <table>
+                <tr>
+                    <td>Nama Lengkap</td>
+                    <td>:</td>
+                    <td><input type="text" name="nama_lengkap" required></td>
+                </tr>
+                <tr>
+                    <td>Tanggal Lahir</td>
+                    <td>:</td>
+                    <td><input type="date" name="tanggal_lahir" required></td>
+                </tr>
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>:</td>
+                    <td>
+                        <input type="radio" name="jenis_kelamin" value="laki-laki" required/> Laki-laki
+                        <input type="radio" name="jenis_kelamin" value="perempuan" /> Perempuan
+                    </td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td>:</td>
+                    <td><textarea name="alamat" cols="22" rows="3" required></textarea></td>
+                </tr>
+                <tr>
+                    <td>E-mail</td>
+                    <td>:</td>
+                    <td><input type="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>No Hp</td>
+                    <td>:</td>
+                    <td><input type="tel" name="no_hp" required></td>
+                </tr>
+                <tr>
+                    <td>Kota</td>
+                    <td>:</td>
+                    <td>
+                        <select name="kota" required>
+                            <option value="">*****SELECT KOTA*****</option>
+                            <option value="Bogor">Bogor</option>
+                            <option value="Jakarta">Jakarta</option>
+                            <option value="Bekasi">Bekasi</option>
+                            <option value="Tangerang">Tangerang</option>
+                            <option value="Depok">Depok</option>
+                            <option value="Cikarang">Cikarang</option>
+                            <option value="Banten">Banten</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: center;">
+                        <input type="submit" name="submit" value="Simpan"/>
+                        <input type="reset" name="reset" value="Batal" />
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</body>
+</html>
