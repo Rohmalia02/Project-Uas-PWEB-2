@@ -1,0 +1,31 @@
+.box1{
+    position: static;
+    background-color: lightgreen; }
+.box2 {
+    position: static;
+    top: 20px;
+    background-color: lightblue;
+    }
+    .box3 {
+    position: static;
+    top: 50px;
+    left: 50px;
+    background-color: lightcoral;
+    }
+    .box4 {
+    position: static;
+    top: 20%;
+    right: 10px;
+    background-color: lightpink;
+    }
+    p{
+    float: left; 
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    margin-right: 10px;
+    }
+    .clear {
+    clear: left;
+    background-color: orange;
+    }
