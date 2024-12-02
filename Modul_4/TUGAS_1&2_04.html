@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan 04</title>
+    <style>
+        .profil-alumni:hover {
+            background-color: lightblue;
+            transform: scale(1.05);
+            transition: 0.3s;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        table th, table td {
+            padding: 10px;
+        }
+        table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <font size="7">Fakultas Ilmu Komputer</font> <br>
+    <font size="5">Universitas Kuningan</font> <br>
+    <font size="3">
+        Alamat: Jl. Pramuka No.67, Purwawinangun,
+        Kec. Kuningan, Kabupaten Kuningan, Jawa Barat 4552
+    </font>
+    <hr size="3">
+
+    <input 
+        type="text" 
+        id="search" 
+        placeholder="Cari dosen berdasarkan nama atau homebase..." 
+        style="width: 100%; padding: 10px; margin-bottom: 10px;"
+    />
+
+    <table border="1">
+        <caption><strong>DAFTAR DOSEN</strong></caption>
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Homebase</th>
+                <th>Rumpun Keilmuan</th>
+            </tr>
+        </thead>
+        <tbody id="dosen-table">
+            <tr class="profil-alumni">
+                <td align="right">1.</td>
+                <td>Tito Sugiharto, M.Eng.</td>
+                <td>Teknik Informatika</td>
+                <td>Computer Engineering</td>
+            </tr>
+            <tr class="profil-alumni">
+                <td align="right">2.</td>
+                <td>Erik Kurniadi, M.Kom.</td>
+                <td>Sistem Informasi</td>
+                <td>Information System</td>
+            </tr>
+            <tr class="profil-alumni">
+                <td align="right">3.</td>
+                <td>Jerry D. Rahajaan, M.Sn.</td>
+                <td>Desain Komunikasi Visual</td>
+                <td>Seni, Desain, & Media</td>
+            </tr>
+            <tr class="profil-alumni">
+                <td align="right">4.</td>
+                <td>Panji Novantara, M.T.</td>
+                <td>Teknik Informatika</td>
+                <td>Computer Science</td>
+            </tr>
+            <tr class="profil-alumni">
+                <td align="right">5.</td>
+                <td>Panji Novantara, M.T.</td>
+                <td>Teknik Informatika</td>
+                <td>Teknik Sipil</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Fitur pencarian sederhana
+        const searchInput = document.getElementById('search');
+        const dosenRows = document.querySelectorAll('#dosen-table tr');
+
+        searchInput.addEventListener('input', function() {
+            const keyword = searchInput.value.toLowerCase();
+            dosenRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(keyword)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
