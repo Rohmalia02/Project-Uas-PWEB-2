@@ -154,4 +154,3 @@ $(document).ready(function () {
       $(this).closest("tr").remove();
     });
   });
-  

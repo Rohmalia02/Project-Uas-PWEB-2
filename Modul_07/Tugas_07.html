@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Management</title>
+  <link href="bootstrap-5.3.3-dist/css/bootstrap.css" rel="stylesheet">
+  <script>
+    const API_URL = 'https://script.google.com/macros/s/your-script-id/exec';
+
+    async function loadJobs() {
+      const response = await fetch(`${API_URL}?action=search&query=`);
+      const data = await response.json();
+      const container = document.getElementById("job-list");
+      container.innerHTML = "";
+
+      data.forEach(job => {
+        const jobCard = `
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">${job.title} - ${job.company}</h5>
+              <p class="card-text">${job.description}</p>
+              <p class="card-text"><small class="text-muted">Posted on: ${job.postingDate}</small></p>
+              <button class="btn btn-danger" onclick="deleteJob('${job.id}')">Delete</button>
+            </div>
+          </div>
+        `;
+        container.innerHTML += jobCard;
+      });
+    }
+
+    async function addJob() {
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const company = document.getElementById("company").value;
+      const postingDate = document.getElementById("postingDate").value;
+
+      if (!title || !description || !company || !postingDate) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        action: 'add',
+        title, description, company, postingDate
+      });
+
+      await fetch(`${API_URL}?${params.toString()}`);
+      document.getElementById("job-form").reset();
+      loadJobs();
+    }
+
+    async function deleteJob(id) {
+      await fetch(`${API_URL}?action=delete&id=${id}`);
+      loadJobs();
+    }
+
+    window.onload = loadJobs;
+  </script>
+</head>
+<body>
+  <div class="container my-5">
+    <h1 class="mb-4">Job Management</h1>
+    <form id="job-form" class="mb-4">
+      <div class="mb-3">
+        <label for="title" class="form-label">Job Title</label>
+        <input type="text" id="title" class="form-control" placeholder="Enter job title">
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" class="form-control" rows="3" placeholder="Enter job description"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="company" class="form-label">Company</label>
+        <input type="text" id="company" class="form-control" placeholder="Enter company name">
+      </div>
+      <div class="mb-3">
+        <label for="postingDate" class="form-label">Posting Date</label>
+        <input type="date" id="postingDate" class="form-control">
+      </div>
+      <button type="button" class="btn btn-primary" onclick="addJob()">Add Job</button>
+    </form>
+
+    <div id="job-list"></div>
+  </div>
+</body>
+</html>
