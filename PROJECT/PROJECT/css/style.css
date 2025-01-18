@@ -1,0 +1,119 @@
+/* Reset and Base Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 15px 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* Header Section */
+.header-section {
+    padding: 100px 0;
+    background-color: #f4f4f4;
+}
+
+.header-title {
+    font-size: 3rem;
+    line-height: 1.2;
+    color: #333;
+}
+
+.text-orange {
+    color: #ff7a00;
+}
+
+.header-img {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-spacing {
+    margin-top: 20px; /* Jarak vertikal dari teks di atas */
+}
+
+/* About Me Section */
+.about-section {
+    padding: 80px 0;
+}
+
+.about-img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Portofolio Section */
+.portofolio-section {
+    padding: 60px 0; /* Menambahkan padding atas dan bawah */
+}
+
+.project-card {
+    transition: transform 0.3s; /* Efek transisi pada hover */
+}
+
+.project-card:hover {
+    transform: scale(1.05); /* Membesar saat hover */
+}
+
+.project-card img {
+    height: 200px; /* Menjaga tinggi gambar */
+    object-fit: cover; /* Memastikan gambar tetap proporsional */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Warna tombol */
+    border: none; /* Menghilangkan border tombol */
+}
+
+/* Menambahkan jarak pada heading dan teks di Contact Section */
+.contact-section .section-title {
+    margin-top: 50px;  /* Menambahkan jarak atas pada title */
+}
+
+.contact-section .text-muted {
+    margin-top: 20px;  /* Menambahkan jarak atas pada deskripsi teks */
+}
+
+/* Tambahkan jarak antara teks dan tombol */
+.btn {
+    margin-top: 20px; /* Atur jarak vertikal universal */
+}
+
+/* Aturan Khusus untuk Section */
+.header-section .btn,
+.about-section .btn,
+.portofolio-section .btn,
+.contact-section .btn {
+    margin-top: 20px;
+}
