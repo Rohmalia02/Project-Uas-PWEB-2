@@ -3,14 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Transaksi;
 
 class Transaksi extends Model
 {
-    public function riwayat()
-{
-    $riwayat = Transaksi::with('details')->latest()->get();
-    return view('riwayat', compact('riwayat'));
-}
-    //
+    protected $fillable = ['user_id', 'metode', 'total'];
+
+    public function details()
+    {
+        return $this->hasMany(TransaksiDetail::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

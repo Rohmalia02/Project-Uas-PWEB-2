@@ -8,46 +8,54 @@ class CartController extends Controller
 {
     public function index()
     {
-        $cart = session()->get('cart', []);
-        return view('keranjang.index', compact('cart'));
+        return view('keranjang.index');
     }
 
     public function tambah(Request $request)
-    {
-        $item = [
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'qty' => $request->qty,
-        ];
-        $cart = session()->get('cart', []);
-        $cart[] = $item;
-        session(['cart' => $cart]);
+{
+    $request->validate([
+        'menu_id' => 'required|numeric',
+        'menu_nama' => 'required|string',
+        'menu_harga' => 'required|numeric',
+        'qty' => 'required|numeric|min:1',
+    ]);
 
-        return redirect('/keranjang')->with('success', 'Item ditambahkan ke keranjang!');
-    }
+    $cart = session()->get('cart', []);
+    $cart[] = [
+        'menu_id' => $request->menu_id,
+        'nama' => $request->menu_nama,
+        'harga' => $request->menu_harga,
+        'qty' => $request->qty,
+    ];
+
+    session()->put('cart', $cart);
+
+    return redirect()->route('keranjang.index')->with('success', 'Item berhasil ditambahkan.');
+}
+
     public function edit(Request $request, $index)
-{
-    $cart = session()->get('cart', []);
+    {
+        $request->validate([
+            'qty' => 'required|numeric|min:1',
+        ]);
 
-    if (isset($cart[$index])) {
-        $cart[$index]['qty'] = $request->qty;
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Jumlah pesanan diperbarui.');
+        $cart = session()->get('cart', []);
+        if (isset($cart[$index])) {
+            $cart[$index]['qty'] = $request->qty;
+            session()->put('cart', $cart);
+        }
+
+        return redirect()->route('keranjang.index')->with('success', 'Jumlah berhasil diperbarui.');
     }
 
-    return redirect()->back()->with('error', 'Item tidak ditemukan.');
-}
+    public function hapus($index)
+    {
+        $cart = session()->get('cart', []);
+        if (isset($cart[$index])) {
+            unset($cart[$index]);
+            session()->put('cart', array_values($cart));
+        }
 
-public function hapus($index)
-{
-    $cart = session()->get('cart', []);
-
-    if (isset($cart[$index])) {
-        unset($cart[$index]);
-        session()->put('cart', array_values($cart)); // Reset index array
-        return redirect()->back()->with('success', 'Item berhasil dihapus.');
+        return redirect()->route('keranjang.index')->with('success', 'Item dihapus dari keranjang.');
     }
-
-    return redirect()->back()->with('error', 'Item tidak ditemukan.');
-}
 }

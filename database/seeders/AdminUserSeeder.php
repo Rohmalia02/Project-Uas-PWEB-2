@@ -10,12 +10,15 @@ class AdminUserSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'email' => 'admin@kantin.com',
-            'password' => Hash::make('admin123'), // password harus di-hash!
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        DB::table('users')->updateOrInsert(
+            ['email' => 'admin@kantin.com'],
+            [
+                'name' => 'Admin Kantin',
+                'email' => 'admin@kantin.com',
+                'password' => Hash::make('admin123'),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        );
     }
 }

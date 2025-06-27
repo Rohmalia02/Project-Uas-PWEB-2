@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ✅ Tambahkan ini untuk token CSRF -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>@yield('title', 'Kantin HIMA-SI')</title>
 
     <!-- Google Font -->
@@ -13,7 +17,7 @@
 
     <style>
         body {
-            background-color:rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.95);
             font-family: 'Poppins', sans-serif;
         }
 
@@ -78,6 +82,7 @@
                 <li class="nav-item"><a class="nav-link" href="/dashboard">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" href="/keranjang">Keranjang</a></li>
                 <li class="nav-item"><a class="nav-link" href="/riwayat">Riwayat Pemesanan</a></li>
+                <li class="nav-item"><a class="nav-link" href="/produk/tambah">Tambah Produk</a></li>
                 <li class="nav-item"><a class="nav-link" href="/akun">Akun</a></li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">

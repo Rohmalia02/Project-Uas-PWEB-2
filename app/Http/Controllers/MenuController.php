@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Menu;
 
 class MenuController extends Controller
 {
@@ -18,4 +19,9 @@ class MenuController extends Controller
         return $this->hasMany(TransaksiDetail::class);
     }
     //
+    public function dashboard()
+{
+    $menus = Menu::all(); // Ambil dari database
+    return view('dashboard', compact('menus'));
+}
 }

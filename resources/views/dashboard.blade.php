@@ -13,14 +13,25 @@
     </div>
 </div>
 
+@php
+    $userName = 'Pengguna';
+    if (isset($user)) {
+        if (is_object($user)) {
+            $userName = $user->nama ?? 'Pengguna';
+        } elseif (is_array($user)) {
+            $userName = $user['nama'] ?? 'Pengguna';
+        }
+    }
+@endphp
+
 <!-- Kategori Menu -->
-<div class="container mt-5">
+<div class="container mt-4">
     <h4 class="text-center mb-4">Pilih Kategori Menu</h4>
     <div class="row justify-content-center">
         @php
             $categories = [
                 ['label' => '🍛 Makanan', 'url' => 'menu/makanan', 'color' => '#e74c3c'],
-                ['label' => '🥤 Minuman', 'url' => 'menu/minuman', 'color' => '#3498db'],
+                ['label' => '🍵 Minuman', 'url' => 'menu/minuman', 'color' => '#3498db'],
             ];
         @endphp
 
@@ -39,41 +50,42 @@
 </div>
 
 <!-- Menu Spesial -->
-<div class="container mt-4">
-    <h5 class="mb-3">Pilih Menu</h5>
+<div class="container mt-5">
+    <h5 class="mb-3">Menu Spesial</h5>
     <div class="row g-3">
         @php
             $menus = [
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Matcha', 'harga' => 'Rp9.091'],
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Coklat', 'harga' => 'Rp9.091'],
-                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie lidi Pedas', 'harga' => 'Rp9.091'],
-                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 'Rp4.546'],
-                ['img' => 'makroni-pedas.webp', 'nama' => 'Makroni Pedas', 'harga' => 'Rp10.000'],
-                ['img' => 'makaroni-a.jpg', 'nama' => 'Makaroni Asin', 'harga' => 'Rp12.000'],
-                ['img' => 'makaroni-p.jpg', 'nama' => 'Makaroni Pedas', 'harga' => 'Rp5.000'],
-                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 'Rp13.500'],
-                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 'Rp13.500'],
-                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 'Rp13.500'],
-                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 'Rp13.500'],
-                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 'Rp13.500'],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Matcha', 'harga' => 9091],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Coklat', 'harga' => 9091],
+                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie lidi Pedas', 'harga' => 9091],
+                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 4546],
+                ['img' => 'makroni-pedas.webp', 'nama' => 'Makroni Pedas', 'harga' => 10000],
+                ['img' => 'makaroni-a.jpg', 'nama' => 'Makaroni Asin', 'harga' => 12000],
+                ['img' => 'makaroni-p.jpg', 'nama' => 'Makaroni Pedas', 'harga' => 5000],
+                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 13500],
+                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 13500],
+                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 13500],
+                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 13500],
+                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 13500],
             ];
         @endphp
 
-        @foreach ($menus as $menu)
-            <div class="col-12 col-sm-6 col-md-4">
-                <div class="card h-100">
-                    <img src="{{ asset('img/' . $menu['img']) }}" class="card-img-top" alt="{{ $menu['nama'] }}" style="height:200px; object-fit:cover;">
+        @foreach($menus as $menu)
+            <div class="col-6 col-md-4 col-lg-3">
+                <div class="card h-100 shadow-sm">
+                    <img src="{{ asset('img/' . $menu['img']) }}" class="card-img-top" alt="{{ $menu['nama'] }}" style="height: 150px; object-fit: cover;">
                     <div class="card-body text-center">
-                        <h6 class="card-title">{{ $menu['nama'] }}</h6>
-                        <p class="text-muted mb-0">{{ $menu['harga'] }}</p>
+                        <h6 class="fw-bold">{{ $menu['nama'] }}</h6>
+                        <p class="mb-1">Harga: Rp{{ number_format($menu['harga'], 0, ',', '.') }}</p>
+<form action="{{ route('keranjang.tambah') }}" method="POST">
+    @csrf
+    <input type="hidden" name="menu_nama" value="{{ $menu['nama'] }}">
+    <input type="hidden" name="menu_harga" value="{{ $menu['harga'] }}">
+    <input type="hidden" name="qty" value="1">
+    <input type="hidden" name="menu_id" value="{{ $loop->iteration }}"> {{-- opsional --}}
+    <button type="submit" class="btn btn-sm btn-success">Tambah ke Keranjang</button>
+</form>
                     </div>
-                    <form action="{{ route('keranjang.tambah') }}" method="POST" class="p-3">
-                        @csrf
-                        <input type="hidden" name="nama" value="{{ $menu['nama'] }}">
-                        <input type="hidden" name="harga" value="{{ str_replace(['Rp', '.'], '', $menu['harga']) }}">
-                        <input type="number" name="qty" value="1" min="1" class="form-control mb-2">
-                        <button type="submit" class="btn btn-success w-100">+ Keranjang</button>
-                    </form>
                 </div>
             </div>
         @endforeach

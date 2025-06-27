@@ -9,16 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-       // database/migrations/...create_transaksis_table.php
+   public function up()
+{
     Schema::create('transaksis', function (Blueprint $table) {
-    $table->id();
-    $table->string('metode');
-    $table->timestamps();
-});
-
-    }
+        $table->id();
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->string('metode'); // ex: cash, qris
+        $table->integer('total');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
