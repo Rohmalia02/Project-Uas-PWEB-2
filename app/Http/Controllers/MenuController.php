@@ -14,11 +14,6 @@ class MenuController extends Controller
         return $this->hasMany(Cart::class);
     }
 
-    public function transaksiDetails()
-    {
-        return $this->hasMany(TransaksiDetail::class);
-    }
-    //
     public function dashboard()
 {
     $menus = Menu::all(); // Ambil dari database

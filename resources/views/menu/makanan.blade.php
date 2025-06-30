@@ -19,16 +19,17 @@
     <div class="row g-3">
         @php
             $makanan = [
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie Lidi Matcha', 'harga' => 'Rp9.091'],
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie Lidi Coklat', 'harga' => 'Rp9.091'],
-                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie Lidi Pedas', 'harga' => 'Rp9.091'],
-                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 'Rp4.546'],
-                ['img' => 'makaroni-pedas.webp', 'nama' => 'Makroni Pedas', 'harga' => 'Rp10.000'],
-                ['img' => 'makaroni-a.jpg', 'nama' => 'Makaroni Asin', 'harga' => 'Rp12.000'],
-                ['img' => 'makaroni-p.jpg', 'nama' => 'Makaroni Pedas', 'harga' => 'Rp5.000'],
-                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 'Rp13.500'],
-                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 'Rp13.500'],
-                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 'Rp13.500'],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Matcha', 'harga' => 10000],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Coklat', 'harga' => 10000],
+                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie lidi Pedas', 'harga' => 10000],
+                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 10000],
+                ['img' => 'makroni_pedas.jpg', 'nama' => 'Makroni Pedas', 'harga' => 10000],
+                ['img' => 'makroni-asin.jpg', 'nama' => 'Makaroni Asin', 'harga' => 10000],
+                ['img' => 'pilus.jpg', 'nama' => 'Pilus', 'harga' => 1000],
+                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 2000],
+                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 1000],
+                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 1500],
+                 ['img' => 'Ciki.jpg', 'nama' => 'Ciki Random', 'harga' => 2000],
             ];
         @endphp
 

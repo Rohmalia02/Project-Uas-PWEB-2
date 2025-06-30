@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Menu;
+use App\Models\Produk;
 
 class ProdukController extends Controller
 {
@@ -18,19 +18,28 @@ class ProdukController extends Controller
         'nama' => 'required|string|max:255',
         'kategori' => 'required|in:makanan,minuman',
         'harga' => 'required|numeric|min:0',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
     ]);
 
-    $data = $request->only(['nama', 'kategori', 'harga']);
-
-    // Handle upload gambar jika ada
+    $gambarPath = null;
     if ($request->hasFile('gambar')) {
-        $gambar = $request->file('gambar')->store('produk', 'public');
-        $data['gambar'] = $gambar;
+        $gambarPath = $request->file('gambar')->store('produk', 'public');
     }
 
-    Menu::create($data); // ⛳️ Model harus sesuai dengan database produk/menu
+    Produk::create([
+        'nama' => $request->nama,
+        'kategori' => $request->kategori,
+        'harga' => $request->harga,
+        'gambar' => $gambarPath,
+    ]);
 
     return redirect()->route('dashboard')->with('success', 'Produk berhasil ditambahkan!');
 }
+ public function index()
+    {
+        $model = new ProdukModel();
+        $data['produk'] = $model->findAll();
+
+        return view('produk/index', $data);
+    }
 }

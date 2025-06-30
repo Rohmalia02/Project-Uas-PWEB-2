@@ -8,6 +8,7 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return redirect('/login');
@@ -21,6 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard'); // ✅ Diberi nama
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/menu/makanan', fn() => view('menu.makanan'));
 Route::get('/menu/minuman', fn() => view('menu.minuman'));
 
@@ -30,7 +32,6 @@ Route::put('/keranjang/{index}', [CartController::class, 'edit'])->name('keranja
 Route::delete('/keranjang/{index}', [CartController::class, 'hapus'])->name('keranjang.hapus');
 
 Route::post('/transaksi/kirim', [TransaksiController::class, 'kirim'])->name('transaksi.kirim');
-
 Route::get('/riwayat', [TransaksiController::class, 'riwayat'])->name('riwayat')->middleware('auth');
 
 Route::get('/produk/tambah', [ProdukController::class, 'create'])->name('produk.create')->middleware('auth');
@@ -41,3 +42,5 @@ Route::get('/akun', [AkunController::class, 'index'])->name('akun');
 Route::middleware(['auth'])->group(function () {
     Route::post('/checkout', [TransaksiController::class, 'checkout'])->name('checkout');
 });
+
+Route::post('/produk/tambah', [ProdukController::class, 'store'])->name('produk.store');

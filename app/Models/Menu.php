@@ -2,18 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
-    use HasFactory;
+    protected $fillable = ['nama', 'kategori', 'harga', 'gambar'];
 
-    // Daftar field yang boleh diisi massal
-    protected $fillable = [
-        'nama',
-        'kategori',
-        'harga',
-        'gambar'
-    ];
+    public function transaksiDetails()
+    {
+        return $this->hasMany(TransaksiDetail::class);
+    }
 }

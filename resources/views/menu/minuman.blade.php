@@ -19,11 +19,10 @@
     <div class="row g-3">
         @php
             $minuman = [
-                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 'Rp8.000'],
-                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 'Rp5.000'],
-                ['img' => 'nutrisari.jpg', 'nama' => 'Nutrisari', 'harga' => 'Rp6.000'],
-                ['img' => 'susu-ultra.jpg', 'nama' => 'Susu Ultra', 'harga' => 'Rp7.000'],
-                ['img' => 'kopi-susu.jpg', 'nama' => 'Kopi Susu', 'harga' => 'Rp10.000'],
+                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 5000],
+                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 3500],
+                ['img' => 'susu.jpg', 'nama' => 'Susu', 'harga' => 5000],
+                ['img' => 'nutrisari.jpg', 'nama' => 'Nutrisari', 'harga' => 3500],
             ];
         @endphp
 

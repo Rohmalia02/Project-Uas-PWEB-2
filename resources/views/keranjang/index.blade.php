@@ -75,17 +75,19 @@
                     </div>
                     <div class="modal-body">
                         <p>Total yang harus dibayar: <strong>Rp{{ number_format($grandTotal, 0, ',', '.') }}</strong></p>
-                       <form action="{{ route('transaksi.kirim') }}" method="POST">
-    @csrf {{-- Token CSRF WAJIB --}}
+                        <form action="{{ route('transaksi.kirim') }}" method="POST">
+    @csrf
+    <!-- Hapus @method('PUT') -->
+    
     <div class="mb-3">
         <label for="metode" class="form-label">Metode Pembayaran</label>
-        <select name="metode" id="metode" class="form-select" required>
-            <option value="">-- Pilih Metode --</option>
+        <select name="metode" class="form-select" required>
             <option value="cash">Bayar Langsung</option>
-            <option value="qris">Bayar dengan QRIS</option>
+            <option value="qris">Bayar QRIS</option>
         </select>
     </div>
-    <button type="submit" class="btn btn-success w-100">Konfirmasi Pembayaran</button>
+
+    <button type="submit" class="btn btn-success w-100">Bayar</button>
 </form>
                     </div>
                 </div>
@@ -102,12 +104,20 @@
         <div class="col-md-6">
             <select name="menu_nama" id="menuSelect" class="form-select" required onchange="updateHargaDanId()">
                 <option value="">-- Pilih Menu --</option>
-                <option value="UDANG KEJU" data-id="1" data-harga="9091">UDANG KEJU</option>
-                <option value="AIR MINERAL" data-id="2" data-harga="4546">AIR MINERAL</option>
-                <option value="MIE GACOAN LEVEL 2" data-id="3" data-harga="10000">MIE GACOAN LEVEL 2</option>
-                <option value="NASI GORENG" data-id="4" data-harga="12000">NASI GORENG</option>
-                <option value="ES TEH MANIS" data-id="5" data-harga="5000">ES TEH MANIS</option>
-                <option value="AYAM GEPREK" data-id="6" data-harga="13500">AYAM GEPREK</option>
+                <option value="Mie lidi Matcha" data-id="1" data-harga="10000">Mie lidi Matcha</option>
+                <option value="Mie lidi Coklat" data-id="2" data-harga="10000">Mie lidi Coklat</option>
+                <option value="Mie lidi Pedas" data-id="3" data-harga="10000">Mie lidi Pedas</option>
+                <option value="Pangsit Pedas" data-id="4" data-harga="10000">Pangsit Pedas</option>
+                <option value="Makroni Pedas" data-id="5" data-harga="10000">Makroni Pedas</option>
+                <option value="Makaroni Asin" data-id="6" data-harga="10000">Makaroni Asin</option>
+                <option value="Pilus" data-id="7" data-harga="1000">Pilus</option>
+                <option value="Beng-Beng" data-id="8" data-harga="2000">Beng-Beng</option>
+                <option value="Sosis" data-id="9" data-harga="1000">Sosis</option>
+                <option value="Permen" data-id="10" data-harga="1500">Permen</option>
+                <option value="Teh Kotak" data-id="11" data-harga="5000">Teh Kotak</option>
+                <option value="Air Mineral" data-id="12" data-harga="3500">Air Mineral</option>
+                <option value="Susu" data-id="13" data-harga="5000">Susu</option>
+                <option value="Nutrisari" data-id="14" data-harga="3500">Nutrisari</option>
             </select>
         </div>
         <div class="col-md-2">
@@ -119,7 +129,6 @@
         <div class="col-md-2">
             <button type="submit" class="btn btn-success w-100">Tambah</button>
         </div>
-        <!-- Input hidden menu_id -->
         <input type="hidden" name="menu_id" id="menuIdInput" required>
     </form>
 

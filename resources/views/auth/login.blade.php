@@ -57,7 +57,7 @@
             </form>
 
             <div class="quote">
-                <small>"Simplicity is an acquired taste." - Katharine Gerould</small>
+                <small>"By Rotiha"</small>
             </div>
         </div>
     </div>

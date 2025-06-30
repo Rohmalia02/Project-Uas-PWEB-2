@@ -36,6 +36,12 @@
         <button type="submit" class="btn btn-success">Simpan Produk</button>
     </form>
 </div>
+ <!-- Input hidden menu_id -->
+        <input type="hidden" name="menu_id" id="menuIdInput" required>
+    </form>
+
+    <a href="{{ route('dashboard') }}" class="btn btn-outline-success mt-4">&larr; Kembali ke Dashboard</a>
+</div>
 @endsection
 <div>
     <!-- An unexamined life is not worth living. - Socrates -->

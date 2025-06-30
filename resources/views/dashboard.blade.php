@@ -13,17 +13,6 @@
     </div>
 </div>
 
-@php
-    $userName = 'Pengguna';
-    if (isset($user)) {
-        if (is_object($user)) {
-            $userName = $user->nama ?? 'Pengguna';
-        } elseif (is_array($user)) {
-            $userName = $user['nama'] ?? 'Pengguna';
-        }
-    }
-@endphp
-
 <!-- Kategori Menu -->
 <div class="container mt-4">
     <h4 class="text-center mb-4">Pilih Kategori Menu</h4>
@@ -49,24 +38,27 @@
     </div>
 </div>
 
-<!-- Menu Spesial -->
+<!-- Produk Manual -->
 <div class="container mt-5">
     <h5 class="mb-3">Menu Spesial</h5>
     <div class="row g-3">
         @php
             $menus = [
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Matcha', 'harga' => 9091],
-                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Coklat', 'harga' => 9091],
-                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie lidi Pedas', 'harga' => 9091],
-                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 4546],
-                ['img' => 'makroni-pedas.webp', 'nama' => 'Makroni Pedas', 'harga' => 10000],
-                ['img' => 'makaroni-a.jpg', 'nama' => 'Makaroni Asin', 'harga' => 12000],
-                ['img' => 'makaroni-p.jpg', 'nama' => 'Makaroni Pedas', 'harga' => 5000],
-                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 13500],
-                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 13500],
-                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 13500],
-                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 13500],
-                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 13500],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Matcha', 'harga' => 10000],
+                ['img' => 'mie-lidi-manis.webp', 'nama' => 'Mie lidi Coklat', 'harga' => 10000],
+                ['img' => 'mie-lidi-pedas.webp', 'nama' => 'Mie lidi Pedas', 'harga' => 10000],
+                ['img' => 'pangsit-pedas.webp', 'nama' => 'Pangsit Pedas', 'harga' => 10000],
+                ['img' => 'makroni_pedas.jpg', 'nama' => 'Makroni Pedas', 'harga' => 10000],
+                ['img' => 'makroni-asin.jpg', 'nama' => 'Makaroni Asin', 'harga' => 10000],
+                ['img' => 'pilus.jpg', 'nama' => 'Pilus', 'harga' => 1000],
+                ['img' => 'bengbeng.jpg', 'nama' => 'Beng-Beng', 'harga' => 2000],
+                ['img' => 'sosis.jpg', 'nama' => 'Sosis', 'harga' => 1000],
+                ['img' => 'permen.jpg', 'nama' => 'Permen', 'harga' => 1500],
+                ['img' => 'teh-kotak.jpg', 'nama' => 'Teh Kotak', 'harga' => 5000],
+                ['img' => 'air-mineral.png', 'nama' => 'Air Mineral', 'harga' => 3500],
+                ['img' => 'susu.jpg', 'nama' => 'Susu', 'harga' => 5000],
+                ['img' => 'nutrisari.jpg', 'nama' => 'Nutrisari', 'harga' => 3500],
+                ['img' => 'Ciki.jpg', 'nama' => 'Ciki Random', 'harga' => 2000],
             ];
         @endphp
 
@@ -77,19 +69,51 @@
                     <div class="card-body text-center">
                         <h6 class="fw-bold">{{ $menu['nama'] }}</h6>
                         <p class="mb-1">Harga: Rp{{ number_format($menu['harga'], 0, ',', '.') }}</p>
-<form action="{{ route('keranjang.tambah') }}" method="POST">
-    @csrf
-    <input type="hidden" name="menu_nama" value="{{ $menu['nama'] }}">
-    <input type="hidden" name="menu_harga" value="{{ $menu['harga'] }}">
-    <input type="hidden" name="qty" value="1">
-    <input type="hidden" name="menu_id" value="{{ $loop->iteration }}"> {{-- opsional --}}
-    <button type="submit" class="btn btn-sm btn-success">Tambah ke Keranjang</button>
-</form>
+                        <form action="{{ route('keranjang.tambah') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="menu_nama" value="{{ $menu['nama'] }}">
+                            <input type="hidden" name="menu_harga" value="{{ $menu['harga'] }}">
+                            <input type="hidden" name="qty" value="1">
+                            <input type="hidden" name="menu_id" value="{{ $loop->iteration }}">
+                            <button type="submit" class="btn btn-sm btn-success">Tambah ke Keranjang</button>
+                        </form>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
 </div>
+
+<!-- Produk dari Database -->
+@if(isset($produkDariDatabase) && $produkDariDatabase->isNotEmpty())
+    <div class="container mt-5">
+        <h5 class="mb-3">Menu dari Baru</h5>
+        <div class="row g-3">
+            @foreach($produkDariDatabase as $produk)
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card h-100 shadow-sm">
+                        <img src="{{ $produk->gambar ? asset('storage/' . $produk->gambar) : asset('img/default.png') }}" class="card-img-top" alt="{{ $produk->nama }}" style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h6 class="fw-bold">{{ $produk->nama }}</h6>
+                            <p class="mb-1">Harga: Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
+                            <form action="{{ route('keranjang.tambah') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="menu_nama" value="{{ $produk->nama }}">
+                                <input type="hidden" name="menu_harga" value="{{ $produk->harga }}">
+                                <input type="hidden" name="qty" value="1">
+                                <input type="hidden" name="menu_id" value="{{ $produk->id }}">
+                                <button type="submit" class="btn btn-sm btn-success">Tambah ke Keranjang</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+@else
+    <div class="container mt-5">
+        <p class="text-muted">Belum ada produk.</p>
+    </div>
+@endif
 
 @endsection

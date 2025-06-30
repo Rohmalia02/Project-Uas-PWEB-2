@@ -11,9 +11,9 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    {{-- Cek jika ada data riwayat --}}
-    @if($riwayats->count())
-        @foreach($riwayats as $transaksi)
+    {{-- Daftar transaksi --}}
+    @if($transaksis->count())
+        @foreach($transaksis as $transaksi)
             <div class="card mb-4">
                 <div class="card-header bg-danger text-white">
                     Pesanan #{{ $transaksi->id }} - Metode: {{ strtoupper($transaksi->metode) }} - 
@@ -34,10 +34,10 @@
                             @forelse($transaksi->details as $index => $item)
                                 <tr class="text-center">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>{{ $item->menu->nama ?? 'Menu dihapus' }}</td>
-                                    <td>Rp{{ number_format($item->menu->harga ?? $item->harga, 0, ',', '.') }}</td>
+                                    <td>{{ $item->menu->nama ?? 'Menu tidak ditemukan' }}</td>
+                                    <td>Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
                                     <td>{{ $item->qty }}</td>
-                                    <td>Rp{{ number_format(($item->menu->harga ?? $item->harga) * $item->qty, 0, ',', '.') }}</td>
+                                    <td>Rp{{ number_format($item->harga * $item->qty, 0, ',', '.') }}</td>
                                 </tr>
                             @empty
                                 <tr>
@@ -52,5 +52,9 @@
     @else
         <div class="alert alert-info text-center">Belum ada riwayat pemesanan.</div>
     @endif
+
+    <div class="text-center mt-4">
+        <a href="{{ route('dashboard') }}" class="btn btn-outline-success">&larr; Kembali ke Dashboard</a>
+    </div>
 </div>
 @endsection

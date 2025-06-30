@@ -11,16 +11,17 @@ class CartController extends Controller
         return view('keranjang.index');
     }
 
-    public function tambah(Request $request)
+   public function tambah(Request $request)
 {
     $request->validate([
-        'menu_id' => 'required|numeric',
+        'menu_id' => 'required|integer',
         'menu_nama' => 'required|string',
-        'menu_harga' => 'required|numeric',
-        'qty' => 'required|numeric|min:1',
+        'menu_harga' => 'required|integer',
+        'qty' => 'required|integer|min:1',
     ]);
 
     $cart = session()->get('cart', []);
+
     $cart[] = [
         'menu_id' => $request->menu_id,
         'nama' => $request->menu_nama,
@@ -30,7 +31,7 @@ class CartController extends Controller
 
     session()->put('cart', $cart);
 
-    return redirect()->route('keranjang.index')->with('success', 'Item berhasil ditambahkan.');
+    return redirect()->route('keranjang.index')->with('success', 'Menu ditambahkan ke keranjang.');
 }
 
     public function edit(Request $request, $index)
